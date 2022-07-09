@@ -1,0 +1,19 @@
+.container {
+  width: 480px;
+  /* margin: 0 auto; */
+  padding: 20px;
+  outline: 1px solid red;
+}
+
+.title__phonebook,
+.title__contacts {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 25px;
+  text-decoration: underline;
+}
+
+.title__contacts {
+  text-decoration: none;
+  margin-bottom: 15px;
+}
