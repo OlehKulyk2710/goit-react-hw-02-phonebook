@@ -15,18 +15,29 @@ class ContactForm extends Component {
     this.setState({ [name]: value });
   };
 
+  checkNewName = (contacts, name) => {
+    const isNameExist = contacts.filter(item => item.name === name);
+    return isNameExist.length;
+  };
+
   handleSubmit = event => {
     event.preventDefault();
-    const { onUpdateContacts } = this.props;
-    const { name, number } = this.state;
-    const contactData = { id: shortid.generate(), name, number };
 
+    const { contacts, onUpdateContacts } = this.props;
+    const { name, number } = this.state;
+
+    const isNameExist = this.checkNewName(contacts, name);
+    if (isNameExist) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+
+    const contactData = { id: shortid.generate(), name, number };
     onUpdateContacts(contactData);
     this.setState({ name: '', number: '' });
   };
 
   render() {
-    // console.log(this.props.onUpdateContacts);
     const { name, number } = this.state;
     return (
       <form className="form" onSubmit={this.handleSubmit}>

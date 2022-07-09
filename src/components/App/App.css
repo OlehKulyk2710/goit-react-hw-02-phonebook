@@ -1,8 +1,9 @@
 .container {
   width: 480px;
-  /* margin: 0 auto; */
+  margin: 10px auto 0;
   padding: 20px;
-  outline: 1px solid red;
+  border: 1px solid #757575;
+  border-radius: 10px;
 }
 
 .title__phonebook,

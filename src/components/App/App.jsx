@@ -17,6 +17,12 @@ class App extends Component {
     setTimeout(() => console.log(this.state.contacts), 500);
   };
 
+  deleteContact = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
+  };
+
   handleFilterChange = value => {
     this.setState({ filter: value });
   };
@@ -26,11 +32,18 @@ class App extends Component {
     return (
       <div className="container">
         <h1 className="title__phonebook">Phonebook</h1>
-        <ContactForm onUpdateContacts={this.updateContacts} />
+        <ContactForm
+          contacts={contacts}
+          onUpdateContacts={this.updateContacts}
+        />
 
         <h2 className="title__contacts">Contacts</h2>
         <Filter filter={filter} onFilterChange={this.handleFilterChange} />
-        <ContactList contacts={contacts} filter={filter} />
+        <ContactList
+          contacts={contacts}
+          filter={filter}
+          onDeleteContact={this.deleteContact}
+        />
       </div>
     );
   }

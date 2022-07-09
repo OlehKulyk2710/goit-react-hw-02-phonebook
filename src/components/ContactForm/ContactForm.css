@@ -40,4 +40,10 @@
   color: white;
   border: 1px solid #757575;
   border-radius: 4px;
+
+  cursor: pointer;
+}
+
+.btn__submit:active {
+  background-color: rgba(7, 109, 192, 0.9);
 }
