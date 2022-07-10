@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
-import './ContactForm.css';
+import css from './ContactForm.module.css';
 
 class ContactForm extends Component {
   state = {
@@ -15,18 +15,22 @@ class ContactForm extends Component {
     this.setState({ [name]: value });
   };
 
-  checkNewName = (contacts, name) => {
-    const isNameExist = contacts.filter(item => item.name === name);
+  checkNewName = name => {
+    const { contacts } = this.props;
+    const newName = name.toLowerCase();
+    const isNameExist = contacts.filter(
+      item => item.name.toLowerCase() === newName
+    );
     return isNameExist.length;
   };
 
   handleSubmit = event => {
     event.preventDefault();
 
-    const { contacts, onUpdateContacts } = this.props;
+    const { onUpdateContacts } = this.props;
     const { name, number } = this.state;
 
-    const isNameExist = this.checkNewName(contacts, name);
+    const isNameExist = this.checkNewName(name);
     if (isNameExist) {
       alert(`${name} is already in contacts.`);
       return;
@@ -40,11 +44,11 @@ class ContactForm extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <form className="form" onSubmit={this.handleSubmit}>
-        <label className="form__label">
+      <form className={css.form} onSubmit={this.handleSubmit}>
+        <label className={css.form__label}>
           Name
           <input
-            className="form__input"
+            className={css.form__input}
             type="text"
             name="name"
             value={name}
@@ -54,10 +58,10 @@ class ContactForm extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <label className="form__label">
+        <label className={css.form__label}>
           Number
           <input
-            className="form__input"
+            className={css.form__input}
             type="tel"
             name="number"
             value={number}
@@ -67,7 +71,7 @@ class ContactForm extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <button type="submit" className="btn__submit">
+        <button type="submit" className={css.btn__submit}>
           Add contact
         </button>
       </form>

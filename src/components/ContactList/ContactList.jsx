@@ -1,5 +1,5 @@
-import './ContactList.css';
 import PropTypes from 'prop-types';
+import ContactItem from 'components/ContactItem/ContactItem';
 
 const ContactList = ({ contacts, filter, onDeleteContact }) => {
   const normalizedFilter = filter.toLowerCase();
@@ -8,18 +8,15 @@ const ContactList = ({ contacts, filter, onDeleteContact }) => {
   );
 
   return (
-    <ul className="contacts__list">
+    <ul>
       {contactsByFilter.map(({ id, name, number }) => (
-        <li key={id} className="contacts__item">
-          {`${name}: ${number}`}
-          <button
-            type="button"
-            className="contacts__btn"
-            onClick={() => onDeleteContact(id)}
-          >
-            Delete
-          </button>
-        </li>
+        <ContactItem
+          key={id}
+          id={id}
+          name={name}
+          number={number}
+          onDeleteContact={onDeleteContact}
+        />
       ))}
     </ul>
   );
@@ -36,4 +33,5 @@ ContactList.propTypes = {
     })
   ).isRequired,
   filter: PropTypes.string,
+  onDeleteContact: PropTypes.func.isRequired,
 };

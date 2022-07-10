@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ContactList from 'components/ContactList/ContactList';
 import ContactForm from 'components/ContactForm/ContactForm';
 import Filter from 'components/Filter/Filter';
-import './App.css';
+import css from './App.module.css';
 
 class App extends Component {
   state = {
@@ -14,7 +14,6 @@ class App extends Component {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, contact],
     }));
-    setTimeout(() => console.log(this.state.contacts), 500);
   };
 
   deleteContact = id => {
@@ -30,14 +29,14 @@ class App extends Component {
   render() {
     const { contacts, filter } = this.state;
     return (
-      <div className="container">
-        <h1 className="title__phonebook">Phonebook</h1>
+      <div className={css.container}>
+        <h1 className={css.title__phonebook}>Phonebook</h1>
         <ContactForm
           contacts={contacts}
           onUpdateContacts={this.updateContacts}
         />
 
-        <h2 className="title__contacts">Contacts</h2>
+        <h2 className={css.title__contacts}>Contacts</h2>
         <Filter filter={filter} onFilterChange={this.handleFilterChange} />
         <ContactList
           contacts={contacts}
